@@ -18,7 +18,7 @@ def get_trending_topics(service):
     client = MongoClient('mongodb+srv://goelanurag2003:So3PNlrVCW2NXSvi@cluster0.px4selc.mongodb.net/')
     db = client['twitter_trends']
     collection = db['trends']
-    driver=webdriver.Chrome(service=service,options=chrome_options)
+    driver=webdriver.Chrome(options=chrome_options)
 
     try:
         driver.get("https://x.com/i/flow/login")
