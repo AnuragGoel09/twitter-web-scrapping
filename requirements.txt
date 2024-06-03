@@ -1,3 +1,4 @@
 selenium
 flask
 pymongo
+flask_cors
