@@ -33,7 +33,7 @@ def get_trending_topics():
 
     # Initialize the Chrome driver with proxy
     service = Service(chrome_driver_path)
-    driver = webdriver.Chrome(service=service, options=chrome_options)
+    driver = webdriver.Chrome(options=chrome_options)
 
     try:
         # Open Twitter login page
