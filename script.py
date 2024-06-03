@@ -1,43 +1,26 @@
 import time
 import json
 from bson import ObjectId
+from selenium.webdriver.chrome.options import Options
 from datetime import datetime
 from selenium import webdriver
-from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.proxy import Proxy, ProxyType
 from selenium.webdriver.support.ui import WebDriverWait
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support import expected_conditions as EC
 from pymongo import MongoClient
 
-client = MongoClient('mongodb+srv://goelanurag2003:So3PNlrVCW2NXSvi@cluster0.px4selc.mongodb.net/')
-db = client['twitter_trends']
-collection = db['trends']
 
-chrome_driver_path = './chromedriver.exe'
+def get_trending_topics(service):
+    chrome_options = Options()
+    # chrome_options.add_argument(f'--proxy-server={proxymesh_url}')
 
-proxymesh_url = "http://anurag09:anurag@us-wa.proxymesh.com:31280"
-
-def get_trending_topics():
-    # Configure proxy
-    proxy = Proxy({
-        'proxyType': ProxyType.MANUAL,
-        'httpProxy': proxymesh_url,
-        'sslProxy': proxymesh_url,
-        'noProxy': ''  # set this value as desired
-    })
-
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument(f'--proxy-server={proxymesh_url}')
-
-    # Initialize the Chrome driver with proxy
-    service = Service(chrome_driver_path)
-    driver = webdriver.Chrome(ChromeDriverManager().install(),options=chrome_options)
+    client = MongoClient('mongodb+srv://goelanurag2003:So3PNlrVCW2NXSvi@cluster0.px4selc.mongodb.net/')
+    db = client['twitter_trends']
+    collection = db['trends']
+    driver=webdriver.Chrome(service=service,options=chrome_options)
 
     try:
-        # Open Twitter login page
         driver.get("https://x.com/i/flow/login")
         time.sleep(8)
         username = driver.find_element(By.TAG_NAME, "input")
