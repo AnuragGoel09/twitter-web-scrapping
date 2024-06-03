@@ -8,6 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.proxy import Proxy, ProxyType
 from selenium.webdriver.support.ui import WebDriverWait
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support import expected_conditions as EC
 from pymongo import MongoClient
 
@@ -33,7 +34,7 @@ def get_trending_topics():
 
     # Initialize the Chrome driver with proxy
     service = Service(chrome_driver_path)
-    driver = webdriver.Chrome(options=chrome_options)
+    driver = webdriver.Chrome(ChromeDriverManager().install(),options=chrome_options)
 
     try:
         # Open Twitter login page

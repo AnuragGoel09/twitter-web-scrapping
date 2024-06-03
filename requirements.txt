@@ -3,3 +3,4 @@ flask
 pymongo
 flask_cors
 gunicorn
+webdriver_manager
