@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify
+from flask import Flask,jsonify
 from flask_cors import CORS
 from script import get_trending_topics
 
@@ -7,7 +7,7 @@ CORS(app)  # Enable CORS for all routes
 
 @app.route('/')
 def index():
-    return render_template("index.html")
+    return jsonify(message="Welcome to the Trending Topics App")
 
 @app.route('/run_script', methods=['POST'])
 def run_script():
