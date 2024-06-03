@@ -1,0 +1,4 @@
+Runnig process:
+note - install neccessary librires from requirements.txt
+step 1: run python app.py to run the server
+step 2: run index.html

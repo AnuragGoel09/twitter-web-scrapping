@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Trends</title>
+    <script>
+        async function runScript() {
+            const response = await fetch('http://127.0.0.1:5000/run_script', {
+                method: 'POST'
+            });
+            const d = await response.json();
+            const data=JSON.parse(d)
+            document.getElementById('head').innerText="\nThese are the most happening topics as on "+data.end_time
+            document.getElementById('list').innerHTML=`<ul><li>${data.trend1}</li><li>${data.trend2}</li><li>${data.trend3}</li><li>${data.trend4}</li><li>${data.trend5}</li></ul>`
+            document.getElementById('ip').innerHTML="\nThe IP address used for this query was "+data.ip_address
+            document.getElementById('results').innerText ="Here’s a JSON extract of this record from the MongoDB:\n"+ JSON.stringify(JSON.parse(d),null,4);
+        }
+    </script>
+</head>
+<body>
+    <h1>Fetch Twitter Trends</h1>
+    <button onclick="runScript()">Get Trending Topics</button>
+    <div id="head"></div>
+    <div id="list"></div>
+    <div id="ip"></div>
+    <pre id="results"></pre>
+</body>
+</html>
