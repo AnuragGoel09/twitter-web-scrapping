@@ -7,7 +7,7 @@ CORS(app)  # Enable CORS for all routes
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return 
 
 @app.route('/run_script', methods=['POST'])
 def run_script():
