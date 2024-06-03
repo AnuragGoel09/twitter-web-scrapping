@@ -15,7 +15,7 @@ client = MongoClient('mongodb+srv://goelanurag2003:So3PNlrVCW2NXSvi@cluster0.px4
 db = client['twitter_trends']
 collection = db['trends']
 
-chrome_driver_path = 'chromedriver.exe'
+chrome_driver_path = './chromedriver.exe'
 
 proxymesh_url = "http://anurag09:anurag@us-wa.proxymesh.com:31280"
 
