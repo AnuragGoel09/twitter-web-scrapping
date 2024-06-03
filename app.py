@@ -15,7 +15,7 @@ def setup():
 
     proxymesh_url = "http://anurag09:anurag@open.proxymesh.com:31280"
     
-    service = Service(ChromeDriverManager().install())
+    service = Service(chrome_driver_path)
     return service
     return webdriver.Chrome(service=service,options=chrome_options)
 
