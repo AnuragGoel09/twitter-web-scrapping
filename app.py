@@ -1,42 +1,36 @@
-from flask import Flask,jsonify
+import time
+import json
+from bson import ObjectId
+from selenium.webdriver.chrome.options import Options
+from datetime import datetime
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from pymongo import MongoClient
+from flask import Flask,jsonify,request
 from flask_cors import CORS
 from script import get_trending_topics
-from selenium import webdriver
 from selenium.webdriver.common.proxy import Proxy, ProxyType
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
 
-app = Flask(__name__)
-CORS(app)  # Enable CORS for all routes
-setup_done = False
+app=Flask(__name__)
 
-def setup():
-    chrome_driver_path = './chromedriver.exe'
+def download_selenium():
+    chromeoptions=webdriver.ChromeOptions()
+    chromeoptions.add_argument("--headless")
+    chromeoptions.add_argument("--no-sandbox")
+    chromeoptions.add_argument("--disable-dev-shm-usage")
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chromeoptions)
+    return {"message":"download dn"}
 
-    proxymesh_url = "http://anurag09:anurag@open.proxymesh.com:31280"
-    
-    service = Service(chrome_driver_path)
-    return service
-    return webdriver.Chrome(service=service,options=chrome_options)
+@app.route('/',methods =['GET','POST'])
+def home():
+    if(request.method == 'GET'):
+        return download_selenium()
+    return {"message":"not get"}
 
-def initialize_driver():
-    global setup_done
-    if not setup_done:
-        print("start")
-        app.service = setup()
-        print("drivers")
-        setup_done = True
-
-initialize_driver()
-
-@app.route('/')
-def index():
-    return jsonify(message="Welcome to the Trending Topics App")
-
-@app.route('/run_script', methods=['POST'])
-def run_script():
-    result = get_trending_topics(app.service)
-    return jsonify(result)
-
-if __name__ == "__main__":
+if __name__=="__main__":
     app.run()
