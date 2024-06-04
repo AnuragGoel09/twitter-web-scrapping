@@ -23,7 +23,8 @@ def download_selenium():
     chromeoptions.add_argument("--headless")
     chromeoptions.add_argument("--no-sandbox")
     chromeoptions.add_argument("--disable-dev-shm-usage")
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()),options=chromeoptions)
+    service = Service('/usr/local/bin/chromedriver')
+    driver = webdriver.Chrome(service=service,options=chromeoptions)
     return {"message":"download dn"}
 
 @app.route('/',methods =['GET','POST'])
