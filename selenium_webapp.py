@@ -30,7 +30,7 @@ def download_selenium():
 def home():
     if(request.method == 'GET'):
         return download_selenium()
-    
+    return {"message":"not get"}
 
 if __name__=="__main__":
     app.run(debug=True,port=3000)
